@@ -23,6 +23,21 @@
     <button @click="borrow3">找两人各借借200</button>
     <XiaoHuang ref="xh"></XiaoHuang>
     <XiaoZhao ref="xz"></XiaoZhao>
+
+    <hr />
+    <h1>作用域插槽</h1>
+    <h3>第一种效果</h3>
+    <List :todos="todos">
+      <template v-slot:default="{ todo }">
+        <span :style="{ color: todo.isComplete ? 'green' : 'red' }">{{ todo.text }}</span>
+      </template>
+    </List>
+    <h3>第二种效果</h3>
+    <List :todos="todos">
+      <template v-slot:default="{ todo, $index }">
+        <span :style="{ color: $index % 2 ? 'skyblue' : 'green' }">{{ $index }}-{{ todo.text }}</span>
+      </template>
+    </List>
   </div>
 </template>
 
@@ -33,13 +48,20 @@
   import HintBotton from './components/HintBotton'
   import XiaoZhao from './components/XiaoZhao'
   import XiaoHuang from './components/XiaoHuang'
+  import List from '@/components/List'
   export default {
     name: 'App',
     data() {
       return {
         msg: 'hello',
         money: 10000,
-        money1: 5000
+        money1: 5000,
+        todos: [
+          { id: 1, text: 'AAA', isComplete: false },
+          { id: 2, text: 'BBB', isComplete: true },
+          { id: 3, text: 'CCC', isComplete: false },
+          { id: 4, text: 'DDD', isComplete: true }
+        ]
       }
     },
     methods: {
@@ -62,6 +84,6 @@
         })
       }
     },
-    components: { Test, XiaoMing, XiaoMing2, HintBotton, XiaoHuang, XiaoZhao }
+    components: { List, Test, XiaoMing, XiaoMing2, HintBotton, XiaoHuang, XiaoZhao }
   }
 </script>
