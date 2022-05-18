@@ -6,18 +6,14 @@
 </template>
 
 <script>
+  import myMxin from '@/mixin/myMixin'
   export default {
     data() {
       return {
         money: 1000
       }
     },
-    methods: {
-      send() {
-        this.money -= 50
-        this.$parent.money1 += 50
-      }
-    }
+    mixins: [myMxin]
   }
 </script>
 
